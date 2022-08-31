@@ -102,6 +102,7 @@ Food::Food(const Point & pos)
 	:GameObject(pos)
 {
 }
+//TODO: Add logic to avoid placing food on snake blocks
 void Food::Update()
 {
 	if (m_Eaten)

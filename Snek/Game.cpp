@@ -2,7 +2,10 @@
 #include "Game.h"
 #include "objects.h"
 
-
+//TODO: Add game menu
+//TODO: Add game area bounds
+//TODO: Add wrap around when snake goes out of bounds
+//TODO: Add pause functionality
 bool Game::Initialise()
 {
 	srand(time(NULL));
@@ -75,7 +78,6 @@ void Game::Update(bool& needRedraw)
 	}
 
 	needRedraw = m_Ticker.Ticked();
-	//OutputDebugString(needRedraw ? L"True" : L"False");
 	if (m_Ticker.Ticked())
 	{
 		m_Ticker.Reset();
