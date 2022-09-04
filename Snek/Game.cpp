@@ -5,8 +5,6 @@
 const int Game::X_DIMENSION = 60;
 const int Game::Y_DIMENSION = 40;
 //TODO: Add game menu
-//TODO: Add game area bounds
-//TODO: Add wrap around when snake goes out of bounds
 //TODO: Add pause functionality
 bool Game::Initialise()
 {
