@@ -50,13 +50,14 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     HWND hWnd = FindWindowEx(NULL, NULL, szWindowClass, NULL);
 
+
     g_Game.Initialise();
 
     // Main message loop:
     //GetMessage(&msg, nullptr, 0, 0)
     while (true)
     {
-        if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE) && !TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
+        if (PeekMessage(&msg, 0, 0, 0, PM_REMOVE) && !TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
         {
             if (msg.message == WM_QUIT)
             {
@@ -124,14 +125,15 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
    hInst = hInstance; // Store instance handle in our global variable
 
-   HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-      CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
+   HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPED | WS_SYSMENU | WS_CAPTION | WS_MINIMIZEBOX,
+      CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, NULL, hInstance, nullptr);
 
    if (!hWnd)
    {
       return FALSE;
    }
 
+   SetWindowPos(hWnd, nullptr, 0, 0, Game::X_DIMENSION * 10 + 15, Game::Y_DIMENSION * 10 + 38, SWP_NOMOVE);
    ShowWindow(hWnd, nCmdShow);
    UpdateWindow(hWnd);
 
@@ -182,6 +184,13 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         break;
     case WM_DESTROY:
         PostQuitMessage(0);
+        break;
+    case WM_GETMINMAXINFO:
+		{
+			MINMAXINFO* minMaxInfo = reinterpret_cast<MINMAXINFO*>(lParam);
+			POINT newDims{Game::X_DIMENSION * 10,Game::Y_DIMENSION * 10};
+			minMaxInfo->ptMaxSize = newDims;
+		}
         break;
     default:
         return DefWindowProc(hWnd, message, wParam, lParam);

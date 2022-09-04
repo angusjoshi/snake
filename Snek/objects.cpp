@@ -46,6 +46,10 @@ void Snake::Update()
 		Point lastPos = m_Head->m_Pos;
 		SnakeBlock* currBlock = m_Head->m_Tail;
 		m_Head->m_Pos = m_Head->m_Pos + m_Direction * 10;
+		if (m_Head->m_Pos.x == Game::X_DIMENSION * 10) m_Head->m_Pos.x = 0;
+		if (m_Head->m_Pos.x == -10) m_Head->m_Pos.x = Game::X_DIMENSION * 10 - 10;
+		if (m_Head->m_Pos.y == Game::Y_DIMENSION * 10) m_Head->m_Pos.y = 0;
+		if (m_Head->m_Pos.y == -10) m_Head->m_Pos.y = Game::Y_DIMENSION * 10 - 10;
 		while (currBlock)
 		{
 			Point nextLastPos = currBlock->m_Pos;
@@ -107,7 +111,7 @@ void Food::Update()
 {
 	if (m_Eaten)
 	{
-		m_Pos = Point((rand() % 100) * 10, (rand() % 100) * 10);
+		m_Pos = Point((rand() % Game::X_DIMENSION) * 10, (rand() % Game::Y_DIMENSION) * 10);
 		m_Eaten = false;
 	}
 }

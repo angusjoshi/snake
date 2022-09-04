@@ -10,6 +10,9 @@ class SnakeBlock;
 class Game
 {
 public: 
+	//X_DIMENSION, Y_DIMENSION define the size of the game window in 10 pixel blocks
+	static const int X_DIMENSION;
+	static const int Y_DIMENSION;
 	bool Initialise();
 	void Update(bool& needRedraw);
 	void Draw(HDC hdc, PAINTSTRUCT* ps);

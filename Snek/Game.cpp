@@ -2,6 +2,8 @@
 #include "Game.h"
 #include "objects.h"
 
+const int Game::X_DIMENSION = 60;
+const int Game::Y_DIMENSION = 40;
 //TODO: Add game menu
 //TODO: Add game area bounds
 //TODO: Add wrap around when snake goes out of bounds
@@ -66,16 +68,15 @@ void Game::Update(bool& needRedraw)
 	{
 		m_UpPressed = false;
 	}
-
-	m_Ticker.Update();
-	m_Snake->Update();
-	m_Food->Update();
-	
 	if (m_Snake->HeadPos() == m_Food->m_Pos)
 	{
 		m_Food->Eat();
 		m_Snake->m_NGrow += 3;
 	}
+	m_Ticker.Update();
+	m_Food->Update();
+	m_Snake->Update();
+	
 
 	needRedraw = m_Ticker.Ticked();
 	if (m_Ticker.Ticked())

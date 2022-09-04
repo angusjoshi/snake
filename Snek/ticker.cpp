@@ -4,7 +4,7 @@
 #include <time.h>
 #include <stdio.h>
 Ticker::Ticker()
-	:m_TickDuration(0.1f),
+	:m_TickDuration(0.05f),
 	m_TimeDelta(0.f),
 	m_Ticks(0),
 	m_Ticked(false),
