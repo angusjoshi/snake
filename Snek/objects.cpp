@@ -11,7 +11,6 @@ GameObject::GameObject(const Point& pos)
 
 Snake::Snake()
 {
-	OutputDebugString(L"asdfasdf");
 	m_Pos = Point(50, 50);
 	m_Length = 1;
 	m_Direction = Point(1, 0);
@@ -24,9 +23,6 @@ Snake::Snake()
 void Snake::Update()
 {
 	bool ticked = g_Game.m_Ticker.Ticked();
-	
-	
-	
 
 	if (ticked && !m_Dead)
 	{
@@ -62,7 +58,6 @@ void Snake::Update()
 		{
 			if (m_Head->m_Pos == currBlock->m_Pos) m_Dead = true;
 			currBlock = currBlock->m_Tail;
-
 		}
 		if (m_NGrow > 0)
 		{
@@ -75,8 +70,6 @@ void Snake::Update()
 }
 void Snake::Draw(HDC hdc)
 {
-
-	//OutputDebugString(L"hehe \n");
 	auto curr = m_Head;
 	while (curr)
 	{
@@ -103,14 +96,13 @@ void SnakeBlock::Update()
 
 }
 Food::Food(const Point & pos)
-	:GameObject(pos)
+	:GameObject(pos), m_Eaten(false)
 {
 }
 //TODO: Add logic to avoid placing food on snake blocks
 void Food::Update()
 {
-	if (m_Eaten)
-	{
+	if (m_Eaten) {
 		m_Pos = Point((rand() % Game::X_DIMENSION) * 10, (rand() % Game::Y_DIMENSION) * 10);
 		m_Eaten = false;
 	}

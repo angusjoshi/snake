@@ -8,9 +8,11 @@ const int Game::Y_DIMENSION = 40;
 //TODO: Add pause functionality
 bool Game::Initialise()
 {
+	if (m_Snake) delete m_Snake;
+	if (m_Food) delete m_Food;
 	srand(time(NULL));
 	m_Snake = new Snake();
-	m_Food = new Food(Point((rand() % 100) * 10, (rand() % 100) * 10));
+	m_Food = new Food(Point((rand() % Game::X_DIMENSION) * 10, (rand() % Game::Y_DIMENSION) * 10));
 	return true;
 }
 void Game::Update(bool& needRedraw)
